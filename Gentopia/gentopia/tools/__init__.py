@@ -13,7 +13,8 @@ from .gradio import *
 from .code_interpreter import PythonCodeInterpreter
 from .file_operation import WriteFile, ReadFile
 from .duckduckgo import DuckDuckGo
-
+from .google_scholar import ReadPDF
+from .google_scholar import GoogleSearch
 
 def load_tools(name: str) -> BaseTool:
     name2tool = {
@@ -43,7 +44,12 @@ def load_tools(name: str) -> BaseTool:
         "search_single_paper": SearchSinglePaper,
         "search_related_paper": SearchRelatedPaper,
         "search_cite_paper": SearchCitePaper,
+        'google_search': GoogleSearch,
+        'read_pdf': ReadPDF,
     }
     if name not in name2tool:
-        raise NotImplementedError
+        print(f"Tool '{name}' not found in the name2tool dictionary.")  # Debug print statement
+        raise NotImplementedError(f"Tool '{name}' is not implemented.")
+    
+    print(f"Loading tool '{name}'...")  # Add this to confirm correct tool loading
     return name2tool[name]

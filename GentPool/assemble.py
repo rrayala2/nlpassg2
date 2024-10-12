@@ -1,7 +1,7 @@
 import argparse
 import os
 
-import dotenv
+from dotenv import load_dotenv
 from gentopia import chat
 from gentopia.assembler.agent_assembler import AgentAssembler
 from gentopia.output import enable_log
@@ -9,7 +9,14 @@ from gentopia.output import enable_log
 
 def main():
     enable_log(log_level='info')
-    dotenv.load_dotenv(".env")
+    load_dotenv("/mnt/c/Users/default.LAPTOP-7062P5CO/Desktop/nlp2/CS678_hw2/nlp hw/GentPool/.env")  # Retrieve the OpenAI API key from the environment
+    api_key = os.getenv('OPENAI_API_KEY')
+
+    # Print the API key to verify
+    # print(f"Loaded API Key: {api_key}")
+
+    if not api_key:
+        raise ValueError("API key not found. Make sure it is set correctly in the .env file.")
 
     parser = argparse.ArgumentParser(description='Assemble an agent with given name.')
     parser.add_argument('name', type=str, help='Name of the agent to assemble.')
@@ -19,7 +26,8 @@ def main():
     agent_name = args.name
     print_agent = args.print_agent
 
-    # check if agent_name is under directory ./gentpool/pool/
+    # Check if agent_name is under directory ./gentpool/pool/
+    print(f"Checking for agent at: ./gentpool/pool/{agent_name}")  # Debugging statement
     if not os.path.exists(f'./gentpool/pool/{agent_name}'):
         raise ValueError(f'Agent {agent_name} does not exist. Check ./gentpool/pool/ for available agents.')
 

@@ -3,6 +3,55 @@ from scholarly import scholarly, ProxyGenerator
 from gentopia.tools.basetool import *
 from scholarly import ProxyGenerator
 from itertools import islice
+from googlesearch import search
+import PyPDF2
+
+class GoogleSearchArgs(BaseModel):
+    query: str = Field(..., description="Search query for Google search")
+    top_k: int = Field(..., description="Number of results to display. Default is 5.")
+
+
+class GoogleSearch(BaseTool):
+    name = "google_search"
+    description = ("Performs a Google search for a given query and returns the top results.")
+    args_schema: Optional[Type[BaseModel]] = GoogleSearchArgs
+    query: str = ""
+    
+    def _run(self, query: AnyStr, top_k: int = 5) -> str:
+        results = []
+        for result in search(query, num_results=top_k):
+            results.append(result)
+        if not results:
+            return "No results found."
+        return '\n'.join(results)
+
+    async def _arun(self, *args: Any, **kwargs: Any) -> Any:
+        raise NotImplementedError
+
+
+class ReadPDFArgs(BaseModel):
+    file_path: str = Field(..., description="Path to read the file ")
+
+
+class ReadPDF(BaseTool):
+    name = "read_pdf"
+    description = ("Reads the content of a PDF file and returns the extracted text.")
+    args_schema: Optional[Type[BaseModel]] = ReadPDFArgs
+
+    def _run(self, file_path: str) -> str:
+        try:
+            with open(file_path, 'rb') as pdf_file:
+                reader = PyPDF2.PdfReader(pdf_file)
+                text = ""
+                for page_num in range(len(reader.pages)):
+                    page = reader.pages[page_num]
+                    text += page.extract_text()
+            return text if text else "No text found in the PDF."
+        except Exception as e:
+            return f"Error reading PDF: {e}"
+
+    async def _arun(self, *args: Any, **kwargs: Any) -> Any:
+        raise NotImplementedError
 
 
 class SearchAuthorByNameArgs(BaseModel):
@@ -300,3 +349,10 @@ if __name__ == "__main__":
     search8 = SearchSinglePaper()
     ans = search8._run("Large language model cascades with mixture of thoughts representations for cost-efficient reasoning")
     print(ans)
+    google_search = GoogleSearch()
+    result = google_search._run("Gentopia collaborative platform", top_k=3)
+    print(result)
+
+    pdf_reader = ReadPDF()
+    pdf_text = pdf_reader._run("C:/Users/default.LAPTOP-7062P5CO/Desktop/nlp assignment 2 final output/nlp hw/nlp hw/CS678_hw2/nlp hw/Gentpool/gentpool/pool/NLP-Agent-2/dcgans.pdf")
+    print(pdf_text)
