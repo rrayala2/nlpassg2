@@ -34,7 +34,7 @@ class GoogleSearch(BaseTool):
 
 
 class ReadPDFArgs(BaseModel):
-    file_path: str = Field(..., description="/mnt/d/lancers/nlp hw 2/gentopia-mason/GentPool/gentpool/pool/NLP-Agent-2/")
+    file_path: str = Field(..., description="C:/Users/default.LAPTOP-7062P5CO/Desktop/nlp assignment 2 final output/nlp hw/nlp hw/CS678_hw2/nlp hw/Gentpool/gentpool/pool/NLP-Agent-2/dcgans.pdf")
 
 
 class ReadPDF(BaseTool):
@@ -365,5 +365,5 @@ if __name__ == "__main__":
     print(result)
 
     pdf_reader = ReadPDF()
-    pdf_text = pdf_reader._run("/mnt/d/lancers/nlp hw 2/gentopia-mason/GentPool/gentpool/pool/NLP-Agent-2/4. DCGANs.pdf")
+    pdf_text = pdf_reader._run("C:/Users/default.LAPTOP-7062P5CO/Desktop/nlp assignment 2 final output/nlp hw/nlp hw/CS678_hw2/nlp hw/Gentpool/gentpool/pool/NLP-Agent-2/dcgans.pdf"")
     print(pdf_text)
