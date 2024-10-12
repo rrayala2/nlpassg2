@@ -365,5 +365,5 @@ if __name__ == "__main__":
     print(result)
 
     pdf_reader = ReadPDF()
-    pdf_text = pdf_reader._run("C:/Users/default.LAPTOP-7062P5CO/Desktop/nlp assignment 2 final output/nlp hw/nlp hw/CS678_hw2/nlp hw/Gentpool/gentpool/pool/NLP-Agent-2/dcgans.pdf"")
+    pdf_text = pdf_reader._run("C:/Users/default.LAPTOP-7062P5CO/Desktop/nlp assignment 2 final output/nlp hw/nlp hw/CS678_hw2/nlp hw/Gentpool/gentpool/pool/NLP-Agent-2/dcgans.pdf")
     print(pdf_text)
