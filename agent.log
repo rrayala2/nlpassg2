@@ -1,4 +1,4 @@
-(gentenv) rithik@Anusha:/mnt/c/Users/default.LAPTOP-7062P5CO/Desktop/nlp2/CS678_hw2/nlp hw/GentPool$ python assemble.py NLP-Agent
+python assemble.py NLP-Agent
 Checking for agent at: ./gentpool/pool/NLP-Agent
 ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Gentopia ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ Welcome to Gentopia!                                                                                                                                                                                                                                                                 │
@@ -138,7 +138,7 @@ NLP-Agent-2:
 
 
 
-(gentenv) rithik@Anusha:/mnt/c/Users/default.LAPTOP-7062P5CO/Desktop/nlp2/CS678_hw2/nlp hw/Gentpool$ python assemble.py NLP-Agent-2
+python assemble.py NLP-Agent-2
 Checking for agent at: ./gentpool/pool/NLP-Agent-2
 Loading tool 'search_author_by_name'...
 Loading tool 'search_author_by_interests'...
